@@ -1,1 +1,0 @@
-send("clan "..VillageClan.." tell "..matches[2].." ready at "..gmcp.Room.Info.num)
