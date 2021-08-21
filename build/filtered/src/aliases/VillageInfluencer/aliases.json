@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Village Influencing Help",
+    "regex": "^vhelp$"
+  },
+  {
+    "name": "Village Influencing Toggle",
+    "regex": "^village (on|off)$"
+  },
+  {
+    "name": "Village Influencing Shuffling Toggle",
+    "regex": "^vhsuffle (on|off)$"
+  },
+  {
+    "name": "Village Influencing Clan",
+    "regex": "^vclan (.+?)$"
+  },
+  {
+    "name": "Village Set",
+    "regex": "^vset (\\w+)$"
+  },
+  {
+    "name": "Village Influencing List",
+    "regex": "^vlist$"
+  },
+  {
+    "name": "Village Influencing Campaign Style",
+    "regex": "^vcampaign (1|2)$"
+  }
+]

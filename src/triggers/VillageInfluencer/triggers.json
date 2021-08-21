@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Close The Door",
+    "patterns": [
+      {
+        "pattern": "The (.+?) door to the (.+?) is opened from the other side.",
+        "type": "regex"
+      }
+    ]
+  },
+  {
+    "name": "Shuffles",
+    "patterns": [
+      {
+        "pattern": "(.+?) blinks and shuffles about impatiently.",
+        "type": "regex"
+      }
+    ]
+  }
+]

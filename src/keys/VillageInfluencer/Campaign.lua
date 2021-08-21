@@ -1,0 +1,1 @@
+send("campaign "..villageCampaignStyle)

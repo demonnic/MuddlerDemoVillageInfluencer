@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+  <ScriptPackage>
+</ScriptPackage>
+  <AliasPackage>
+    <AliasGroup isActive="yes" isFolder="yes">
+  <name>VillageInfluencer</name>
+      <script/>
+  <command/>
+  <packageName/>
+  <regex/>
+      <Alias isActive="yes" isFolder="no">
+  <name>Village Influencing Help</name>
+        <script>cecho("\n&lt;purple&gt;VILLAGE ON/OFF     Toggle the package on and off.")
+cecho("\n&lt;purple&gt;VCLAN &lt;clan alias&gt; Set the clan to make calls on.")
+cecho("\n&lt;purple&gt;VSHUFFLE ON/OFF    Toggle calling out shuffles to the set clan.")
+cecho("\n&lt;purple&gt;VLIST              See the list of villages and correlating race.")
+cecho("\n&lt;purple&gt;VSET &lt;village&gt;     Set your village for influencing.")
+cecho("\n&lt;purple&gt;VCAMPAIGN 1 or 2   Sets campaign to CRUSADE for 1 or SANCTUARY for 2 to use as below.")
+cecho("\n&lt;purple&gt;CTRL+F9            CR2 Influence skill, determined by your city.")
+cecho("\n&lt;purple&gt;CTRL+F10           CR4 Influence skill, determined by your city.")
+cecho("\n&lt;purple&gt;CTRL+F11           CR6 Influence skill, determined by your city.")
+cecho("\n&lt;purple&gt;CTRL+F12           Campain &lt;style&gt; as set in VCAMPAIGN.")
+villageCampaignStyle = {}</script>
+  <command/>
+  <packageName/>
+  <regex>^vhelp$</regex>
+</Alias>
+      <Alias isActive="yes" isFolder="no">
+  <name>Village Influencing Toggle</name>
+        <script>if matches[2] == "on" then
+  enableTrigger("Village Influencing")
+  enableKey("Village Influence")
+  cecho("&lt;green&gt; Village Influencing activated!")
+elseif matches[2] == "off" then
+  disableTrigger("Village Influencing")
+  disableKey("Village Influence")
+  cecho("&lt;red&gt; Village Influencing deactivated!")
+end</script>
+  <command/>
+  <packageName/>
+  <regex>^village (on|off)$</regex>
+</Alias>
+      <Alias isActive="yes" isFolder="no">
+  <name>Village Influencing Shuffling Toggle</name>
+        <script>if matches[2] == "on" then
+  enableTrigger("Shuffles")
+  cecho("&lt;purple&gt; Shuffles will be announce on "..VillageClan.."!")
+elseif matches[2] == "off" then
+  disableTrigger("Shuffles")
+  cecho("&lt;purple&gt; Shuffles will &lt;red&gt;NOT &lt;purple&gt;be announce on "..VillageClan.."!")
+end</script>
+  <command/>
+  <packageName/>
+  <regex>^vhsuffle (on|off)$</regex>
+</Alias>
+      <Alias isActive="yes" isFolder="no">
+  <name>Village Influencing Clan</name>
+        <script>VillageClan = matches[2]
+cecho("\n&lt;purple&gt; Clan for Village calls set to &lt;red&gt;"..matches[2].."&lt;purple&gt;!")</script>
+  <command/>
+  <packageName/>
+  <regex>^vclan (.+?)$</regex>
+</Alias>
+      <Alias isActive="yes" isFolder="no">
+  <name>Village Set</name>
+        <script>if matches[2]:title() == "Acknor" then
+  VillageNpc = "orc"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Angkrag" then
+  cecho("\n&lt;purple&gt; Please set to &lt;red&gt; Angkrag1 &lt;purple&gt;for orc, &lt;red&gt; Angkrag2 &lt;purple&gt;for viscanti, or &lt;red&gt; Angkrag3 &lt;purple&gt;for dwarf!")
+  elseif matches[2]:title() == "Angkrag1" then
+  VillageNpc = "orc"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Angkrag2" then
+  VillageNpc = "viscanti"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Angkrag3" then
+  VillageNpc = "dwarf"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Dairuchi" then
+  VillageNpc = "dracnari"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Delport" then
+  VillageNpc = "human"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Estelbar" then
+  VillageNpc = "furrikin"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Ixthiaxa" then
+  VillageNpc = "illithoid"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Paavik" then
+  VillageNpc = "krokani"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Ptoma" then
+  VillageNpc = "kephera"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Rikenfriez" then
+  cecho("\n&lt;purple&gt; Please set to &lt;red&gt; Rikenfriez1 &lt;purple&gt;for igasho or &lt;red&gt; Rikenfriez2 &lt;purple&gt;for tae'dae!")
+  elseif matches[2]:title() == "Rikenfriez1" then
+  VillageNpc = "igasho"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Rikenfriez2" then
+  VillageNpc = "tae'dae"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Rockholm" then
+  VillageNpc = "dwarf"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Shanthmark" then
+  VillageNpc = "aslaran"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Southgard" then
+  VillageNpc = "dwarf"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Stewartsville" then
+  VillageNpc = "human"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Talthos" then
+  cecho("\n&lt;purple&gt; Please set to &lt;red&gt; Talthos1 &lt;purple&gt;for lucidian or &lt;red&gt; Talthos2 &lt;purple&gt;for trill!")
+  elseif matches[2]:title() == "Talthos1" then
+  VillageNpc = "lucidian"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  elseif matches[2]:title() == "Talthos2" then
+  VillageNpc = "trill"
+  cecho("\n&lt;purple&gt; Village set to &lt;red&gt;" ..matches[2].."&lt;purple&gt; with &lt;red&gt;"..VillageNpc.. "&lt;purple&gt; as villagers!")
+  end</script>
+  <command/>
+  <packageName/>
+  <regex>^vset (\w+)$</regex>
+</Alias>
+      <Alias isActive="yes" isFolder="no">
+  <name>Village Influencing List</name>
+        <script>cecho("\n&lt;purple&gt;Acknor &lt;red&gt;for &lt;purple&gt;orc")
+cecho("\n&lt;purple&gt;Angkrag1 &lt;red&gt;for &lt;purple&gt;orc")
+cecho("\n&lt;purple&gt;Angkrag2 &lt;red&gt;for &lt;purple&gt;viscanti")
+cecho("\n&lt;purple&gt;Angkrag3 &lt;red&gt;for &lt;purple&gt;dwarf")
+cecho("\n&lt;purple&gt;Dairuchi &lt;red&gt;for &lt;purple&gt;dracnari")
+cecho("\n&lt;purple&gt;Delport &lt;red&gt;for &lt;purple&gt;human")
+cecho("\n&lt;purple&gt;Estelbar &lt;red&gt;for &lt;purple&gt;furrikin")
+cecho("\n&lt;purple&gt;Ixthiaxa &lt;red&gt;for &lt;purple&gt;illithoid")
+cecho("\n&lt;purple&gt;Paavik &lt;red&gt;for &lt;purple&gt;krokani")
+cecho("\n&lt;purple&gt;Ptoma &lt;red&gt;for &lt;purple&gt;kephera")
+cecho("\n&lt;purple&gt;Rikenfriez1 &lt;red&gt;for &lt;purple&gt;igasho")
+cecho("\n&lt;purple&gt;Rikenfriez2 &lt;red&gt;for &lt;purple&gt;tae'dae")
+cecho("\n&lt;purple&gt;Rockholm &lt;red&gt;for &lt;purple&gt;dwarf")
+cecho("\n&lt;purple&gt;Shanthmark &lt;red&gt;for &lt;purple&gt;aslaran")
+cecho("\n&lt;purple&gt;Southgard &lt;red&gt;for &lt;purple&gt;dwarf")
+cecho("\n&lt;purple&gt;Stewartsville &lt;red&gt;for &lt;purple&gt;human")
+cecho("\n&lt;purple&gt;Talthos1 &lt;red&gt;for &lt;purple&gt;lucidian")
+cecho("\n&lt;purple&gt;Talthos2 &lt;red&gt;for &lt;purple&gt;trill")</script>
+  <command/>
+  <packageName/>
+  <regex>^vlist$</regex>
+</Alias>
+      <Alias isActive="yes" isFolder="no">
+  <name>Village Influencing Campaign Style</name>
+        <script>if matches[2] == "1" then
+  villageCampaignStyle = "crusade"
+  cecho("\n&lt;purple&gt; Campaign style set to &lt;red&gt;CRUSADE&lt;purple&gt;!")
+elseif matches[2] == "2" then
+  villageCampaignStyle = "sanctuary"
+  cecho("\n&lt;purple&gt; Campaign style set to &lt;red&gt;SANCTUARY&lt;purple&gt;!")
+end</script>
+  <command/>
+  <packageName/>
+  <regex>^vcampaign (1|2)$</regex>
+</Alias>
+</AliasGroup>
+</AliasPackage>
+  <TimerPackage>
+</TimerPackage>
+  <TriggerPackage>
+    <TriggerGroup isActive="yes" isFolder="yes" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isColorTrigger="" isColorTriggerFg="" isColorTriggerBg="">
+  <name>VillageInfluencer</name>
+      <script/>
+  <triggerType>0</triggerType>
+  <conditonLineDelta>0</conditonLineDelta>
+  <mStayOpen>0</mStayOpen>
+  <mCommand/>
+  <packageName/>
+  <path/>
+  <mFgColor>#ff0000</mFgColor>
+  <mBgColor>#ffff00</mBgColor>
+  <mSoundFile/>
+  <colorTriggerFgColor>#000000</colorTriggerFgColor>
+  <colorTriggerBgColor>#000000</colorTriggerBgColor>
+      <regexCodeList>
+</regexCodeList>
+      <regexCodePropertyList>
+</regexCodePropertyList>
+      <Trigger isActive="yes" isFolder="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isColorTrigger="" isColorTriggerFg="" isColorTriggerBg="">
+  <name>Close The Door</name>
+        <script>send("close door "..matches[3])</script>
+  <triggerType>0</triggerType>
+  <conditonLineDelta>0</conditonLineDelta>
+  <mStayOpen>0</mStayOpen>
+  <mCommand/>
+  <packageName/>
+  <path>VillageInfluencer</path>
+  <mFgColor>#ff0000</mFgColor>
+  <mBgColor>#ffff00</mBgColor>
+  <mSoundFile/>
+  <colorTriggerFgColor>#000000</colorTriggerFgColor>
+  <colorTriggerBgColor>#000000</colorTriggerBgColor>
+        <regexCodeList>
+<string>The (.+?) door to the (.+?) is opened from the other side.</string>
+        </regexCodeList>
+        <regexCodePropertyList>
+<integer>1</integer>
+        </regexCodePropertyList>
+</Trigger>
+      <Trigger isActive="yes" isFolder="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isColorTrigger="" isColorTriggerFg="" isColorTriggerBg="">
+  <name>Shuffles</name>
+        <script>send("clan "..VillageClan.." tell "..matches[2].." ready at "..gmcp.Room.Info.num)</script>
+  <triggerType>0</triggerType>
+  <conditonLineDelta>0</conditonLineDelta>
+  <mStayOpen>0</mStayOpen>
+  <mCommand/>
+  <packageName/>
+  <path>VillageInfluencer</path>
+  <mFgColor>#ff0000</mFgColor>
+  <mBgColor>#ffff00</mBgColor>
+  <mSoundFile/>
+  <colorTriggerFgColor>#000000</colorTriggerFgColor>
+  <colorTriggerBgColor>#000000</colorTriggerBgColor>
+        <regexCodeList>
+<string>(.+?) blinks and shuffles about impatiently.</string>
+        </regexCodeList>
+        <regexCodePropertyList>
+<integer>1</integer>
+        </regexCodePropertyList>
+</Trigger>
+</TriggerGroup>
+</TriggerPackage>
+  <KeyPackage>
+    <KeyGroup isActive="yes" isFolder="yes">
+  <name>VillageInfluencer</name>
+  <packageName/>
+      <script/>
+  <command/>
+  <keyCode>33554431</keyCode>
+  <keyModifier>0</keyModifier>
+      <Key isActive="yes" isFolder="no">
+  <name>CR2 Influence</name>
+  <packageName/>
+        <script>local city = gmcp.Char.Status.city
+if city:match("Celest") then
+  send("influence " .. VillageNpc .. " with proselytising")
+elseif city:match("Gaudiguch") then
+  send("influence " .. VillageNpc .. " with freedom")
+elseif city:match("Glomdoring") then
+  send("influence " .. VillageNpc .. " with manipulation")
+elseif city:match("Hallifax") then
+  send("influence " .. VillageNpc .. " with accordance")
+elseif city:match("Magnagora") then
+  send("influence " .. VillageNpc .. " with shock")
+elseif city:match("Serenwilde") then
+  send("influence " .. VillageNpc .. " with oration")
+end</script>
+  <command/>
+  <keyCode/>
+  <keyModifier>67108864</keyModifier>
+</Key>
+      <Key isActive="yes" isFolder="no">
+  <name>CR4 Influence</name>
+  <packageName/>
+        <script>local city = gmcp.Char.Status.city
+if city:match("Celest") then
+  send("influence " .. VillageNpc .. " with preaching")
+elseif city:match("Gaudiguch") then
+  send("influence " .. VillageNpc .. " with liberty")
+elseif city:match("Glomdoring") then
+  send("influence " .. VillageNpc .. " with trickery")
+elseif city:match("Hallifax") then
+  send("influence " .. VillageNpc .. " with collaboration")
+elseif city:match("Magnagora") then
+  send("influence " .. VillageNpc .. " with awe")
+elseif city:match("Serenwilde") then
+  send("influence " .. VillageNpc .. " with lectures")
+end</script>
+  <command/>
+  <keyCode/>
+  <keyModifier>67108864</keyModifier>
+</Key>
+      <Key isActive="yes" isFolder="no">
+  <name>CR6 Influence</name>
+  <packageName/>
+        <script>local city = gmcp.Char.Status.city
+if city:match("Celest") then
+  send("influence " .. VillageNpc .. " with evangelising")
+elseif city:match("Gaudiguch") then
+  send("influence " .. VillageNpc .. " with revolution")
+elseif city:match("Glomdoring") then
+  send("influence " .. VillageNpc .. " with intrigue")
+elseif city:match("Hallifax") then
+  send("influence " .. VillageNpc .. " with assimilation")
+elseif city:match("Magnagora") then
+  send("influence " .. VillageNpc .. " with brainwash")
+elseif city:match("Serenwilde") then
+  send("influence " .. VillageNpc .. " with recitation")
+end</script>
+  <command/>
+  <keyCode/>
+  <keyModifier>67108864</keyModifier>
+</Key>
+      <Key isActive="yes" isFolder="no">
+  <name>Campaign</name>
+  <packageName/>
+        <script>send("campaign "..villageCampaignStyle)</script>
+  <command/>
+  <keyCode/>
+  <keyModifier>67108864</keyModifier>
+</Key>
+</KeyGroup>
+</KeyPackage>
+</MudletPackage>
